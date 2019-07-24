@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 
 import Header from './header.js'
 import Map from './map.js'
-import Search from './search.js'
+import SearchForm from './search-form.js'
 import Result from './result.js'
 
 
@@ -17,19 +17,20 @@ class App extends Component {
     }
   }
 
+  handleSearchSubmit = query => {
+    alert(query);
+  }
+
   render() {
     return (
       <>
         <Header />
-        <Search />
+        <SearchForm handleSubmit={this.handleSearchSubmit}/>
         <Map />
         <Result />
       </>
     );
   }
 }
-
-
-
 
 export default App;
