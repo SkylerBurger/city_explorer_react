@@ -1,5 +1,18 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import {BrowserRouter} from 'react-router-dom'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './components/app';
+
+class Main extends Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        );
+    }
+}
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(<Main />, rootElement);
