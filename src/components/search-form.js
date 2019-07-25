@@ -3,6 +3,8 @@ import React, { Fragment, Component } from 'react'
 
 class SearchForm extends Component {
   
+  // State is needed to keep track of query
+  // long enough to make a function call
   constructor(props) {
     super(props);
     this.state = {
@@ -10,16 +12,24 @@ class SearchForm extends Component {
     }
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    this.props.handleSubmit(this.state.query)
-  }
 
+  // Changes this component's state
+  // when the input value is changed
   handleChange = e => {
     this.setState({
       query: e.target.value
     })
   }
+
+  
+  // Calls the function passed down from App
+  // sending the current state
+  // when the submit button is pressed
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.handleSubmit(this.state.query)
+  }
+
   
   render() {
     return (
