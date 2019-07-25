@@ -4,19 +4,15 @@ import superagent from "superagent"
 import Header from './header.js'
 import Map from './map.js'
 import SearchForm from './search-form.js'
-import DarkSky from './darkSky.js'
+import SearchResults from './search-results.js'
+
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: {
-        search_query: '',
-        formatted_query: '',
-        latitude: '',
-        longitude: ''
-      },
+      location: null,
       yelp_data: [],
       darkSky_data: [],
       movieDB_data: [],
@@ -28,7 +24,7 @@ class App extends Component {
   handleSearchSubmit = async query => {
     // Geocode
     let location_results = await superagent.get(`https://city-explorer-backend.herokuapp.com/location?data=${query}`);
-    await this.setState({
+    this.setState({
       location: {
         search_query: query,
         formatted_query: location_results.body.formatted_query,
@@ -55,8 +51,12 @@ class App extends Component {
       <>
         <Header />
         <SearchForm handleSubmit={this.handleSearchSubmit}/>
-        <Map location={this.state.location}/>
-        <DarkSky weather={this.state.darkSky_data} />
+        {this.state.location && (
+          <>
+          <Map location={this.state.location}/>
+          <SearchResults darkSky={this.state.darkSky_data}/>
+          </>
+        )}
       </>
     );
   }
