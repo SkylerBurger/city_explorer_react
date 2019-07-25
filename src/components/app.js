@@ -37,11 +37,16 @@ class App extends Component {
       }
     });
     
-    let location_data = JSON.stringify(this.state.location)
+    
+    let query_data = `?data[search_query]=${this.state.location.search_query}&data[formatted_query]=${this.state.location.formatted_query}&data[latitude]=${this.state.location.latitude}&data[longitude]=${this.state.location.longitude}`
 
     // DarkSky
-    let darkSky_results = await superagent.get(`https://city-explorer-backend.herokuapp.com/weather?data=${location_data}`)
-    alert(darkSky_results)
+    let darkSky_results = await superagent.get(`https://city-explorer-backend.herokuapp.com/weather${query_data}`)
+
+
+    this.setState({
+      darkSky_data: darkSky_results.body
+    })
 
   }
 
@@ -51,10 +56,12 @@ class App extends Component {
         <Header />
         <SearchForm handleSubmit={this.handleSearchSubmit}/>
         <Map location={this.state.location}/>
-        {/* <DarkSky location={this.state.location} /> */}
+        <DarkSky weather={this.state.darkSky_data} />
       </>
     );
   }
 }
 
 export default App;
+
+// https://city-explorer-backend.herokuapp.com/
