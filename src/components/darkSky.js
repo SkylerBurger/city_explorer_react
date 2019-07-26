@@ -1,19 +1,19 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class DarkSky extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            latitude: this.props.lat,
-            longitude: this.props.long
-        }
-    }
-    // render() {
-    //     return (
 
-    //     );
-    // }
+  render() {
+    return (
+      <>
+      <h2>Results from the DarkSky API</h2>
+      <ul>
+        {this.props.darkSky.map(day => (
+          <li>The forecast for {day.time} is: {day.forecast}</li>
+        ))}
+      </ul>
+      </>
+    );
+  }
 }
 
 export default DarkSky

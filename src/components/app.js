@@ -4,19 +4,15 @@ import superagent from "superagent"
 import Header from './header.js'
 import Map from './map.js'
 import SearchForm from './search-form.js'
-import DarkSky from './darkSky.js'
+import SearchResults from './search-results.js'
+
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: {
-        search_query: '',
-        formatted_query: '',
-        latitude: '',
-        longitude: ''
-      },
+      location: null,
       yelp_data: [],
       darkSky_data: [],
       movieDB_data: [],
@@ -27,8 +23,8 @@ class App extends Component {
 
   handleSearchSubmit = async query => {
     // Geocode
-    let location_results = await superagent.get(`https://city-explorer-backend.herokuapp.com/location?data=${query}`);
-    await this.setState({
+    let location_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/location?data=${query}`);
+    this.setState({
       location: {
         search_query: query,
         formatted_query: location_results.body.formatted_query,
@@ -37,11 +33,27 @@ class App extends Component {
       }
     });
     
-    let location_data = JSON.stringify(this.state.location)
+    
+    let query_data = `?data[search_query]=${this.state.location.search_query}&data[formatted_query]=${this.state.location.formatted_query}&data[latitude]=${this.state.location.latitude}&data[longitude]=${this.state.location.longitude}`
 
-    // DarkSky
-    let darkSky_results = await superagent.get(`https://city-explorer-backend.herokuapp.com/weather?data=${location_data}`)
-    alert(darkSky_results)
+    let darkSky_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/weather${query_data}`)
+
+    let yelp_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/yelp${query_data}`)
+
+    let eventbrite_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/events${query_data}`)
+
+    let moviedb_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/movies${query_data}`)
+
+    let trails_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/trails${query_data}`)
+
+
+    this.setState({
+      darkSky_data: darkSky_results.body,
+      yelp_data: yelp_results.body,
+      events_data: eventbrite_results.body,
+      movieDB_data: moviedb_results.body,
+      trails_data: trails_results.body
+    })
 
   }
 
@@ -50,11 +62,21 @@ class App extends Component {
       <>
         <Header />
         <SearchForm handleSubmit={this.handleSearchSubmit}/>
-        <Map location={this.state.location}/>
-        {/* <DarkSky location={this.state.location} /> */}
+        {this.state.location && (
+          <>
+          <Map location={this.state.location}/>
+          <SearchResults  darkSky={this.state.darkSky_data}
+                          yelp={this.state.yelp_data}
+                          events={this.state.events_data}
+                          movies={this.state.movieDB_data}
+                          trails={this.state.trails_data}/>
+          </>
+        )}
       </>
     );
   }
 }
 
 export default App;
+
+// https://city-explorer-backend.herokuapp.com/
