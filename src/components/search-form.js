@@ -35,6 +35,7 @@ class SearchForm extends Component {
     return (
       <Fragment>
         <form onSubmit={this.handleSubmit}>
+          <label>Search for a location</label>
           <input type="text" placeholder="Location" onChange={this.handleChange} value={this.state.query}/>
           <button>Explore!</ button>
         </form>

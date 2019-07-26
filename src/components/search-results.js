@@ -13,8 +13,8 @@ class SearchResults extends Component {
   render() {
     return (
       <>
-        <DarkSky darkSky={this.props.darkSky} />
-        <Yelp yelp={this.props.yelp} />
+        <DarkSky darkSky={this.props.darkSky}/>
+        <Yelp yelp={this.props.yelp}/>
         <Events events={this.props.events}/>
         <Movies movies={this.props.movies}/>
         <Trails trails={this.props.trails}/>
