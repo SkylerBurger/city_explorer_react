@@ -1,0 +1,35 @@
+.yelp {
+  height: 75px;
+  padding-bottom: 3px;
+}
+  
+.movies {
+  height: 150px;
+}
+  
+.column-container {
+  display: flex;
+    
+  section {
+    display: inline-block;
+    border: 4px groove;
+    width: 100%;
+    margin: 5px;
+    background-color: #FFF;
+  }
+}
+  
+.query-placeholder, form, header, h3 {
+  text-align: center;
+}
+
+#input-search {
+  padding: 5px;
+  border: 1px solid $border-blue;
+}
+
+#map {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid $border-blue;
+}

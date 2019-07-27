@@ -5,7 +5,7 @@ class Yelp extends Component {
   render() {
     return (
       <>
-        <section className="column-container">
+        <section>
           <h3>Results from the Yelp API</h3>
           <ul>
             {this.props.yelp.map(result => (

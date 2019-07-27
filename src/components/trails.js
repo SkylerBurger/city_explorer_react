@@ -5,7 +5,7 @@ class Trails extends Component {
   render() {
     return (
       <>
-        <section className="column-container">
+        <section>
           <h3>Results from the Hiking Project API</h3>
           <ul>
             {this.props.trails.map(trail => (
