@@ -5,7 +5,7 @@ class Events extends Component {
   render() {
     return (
       <>
-        <section className="column-container">
+        <section>
           <h3>Results from the Eventbrite API</h3>
           <ul>
             {this.props.events.map(event => (

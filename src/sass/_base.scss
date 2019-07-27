@@ -1,0 +1,38 @@
+body, html {
+    background-color: $bg-color;
+    @extend %header-font;
+    color: black;
+  }
+
+  header, form label, h3 {
+    @extend %styled-font;
+  }
+  
+  header {
+    p {
+      font-size: $small-font;
+    }
+  }
+  
+  label {
+    font-size: $small-font;
+  }
+  
+  h1 {
+    font-size: 5vw;
+    color: #4484CE;
+  }
+  
+  h2 {
+    font-size: 2vw;
+  }
+  
+  button {
+    padding: 5px 15px;
+    background-color: #F19F4D;
+    border: 1px solid $border-blue;
+  }
+
+  span {
+    font-weight: bold;
+  }
