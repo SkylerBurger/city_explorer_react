@@ -23,7 +23,7 @@ class App extends Component {
 
   handleSearchSubmit = async query => {
     // Geocode
-    let location_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/location?data=${query}`);
+    let location_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/location?data=${query}`);
     this.setState({
       location: {
         search_query: query,
@@ -36,15 +36,15 @@ class App extends Component {
     
     let query_data = `?data[search_query]=${this.state.location.search_query}&data[formatted_query]=${this.state.location.formatted_query}&data[latitude]=${this.state.location.latitude}&data[longitude]=${this.state.location.longitude}`
 
-    let darkSky_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/weather${query_data}`)
+    let darkSky_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/weather${query_data}`)
 
-    let yelp_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/yelp${query_data}`)
+    let yelp_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/yelp${query_data}`)
 
-    let eventbrite_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/events${query_data}`)
+    let eventbrite_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/events${query_data}`)
 
-    let moviedb_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/movies${query_data}`)
+    let moviedb_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/movies${query_data}`)
 
-    let trails_results = await superagent.get(`https://jb-flask-hello-world.onrender.com/trails${query_data}`)
+    let trails_results = await superagent.get(`https://pythonic-city-explorer.onrender.com/trails${query_data}`)
 
 
     this.setState({
@@ -78,5 +78,3 @@ class App extends Component {
 }
 
 export default App;
-
-// https://city-explorer-backend.herokuapp.com/
